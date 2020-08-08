@@ -1,7 +1,7 @@
 # Abusing Docker Weak Configuration
 
 
-![docker.png](/images/docker.png "docker.png")
+![docker.png](/docs/docker.png "docker.png")
 
 
 In this article, I talk about a classic privilege escalation through Docker containers. This is a very well known trick used when the configuration let too many accounts run docker, and you will have to do it in some CTF boxes at least. Unfortunately, it is not always correcly understood.     
@@ -15,7 +15,7 @@ Let's see what it is about.
 
 Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package.
 
-![schema.png](/images/schema.png "schema.png")
+![schema.png](/docs/schema.png "schema.png")
 
 **What are containers ?**
 
@@ -84,7 +84,7 @@ GTFOBins is a curated list of Unix binaries that can be exploited by an attacker
 
 There are some inputs about Docker [here](https://gtfobins.github.io/gtfobins/docker):
 
-![GTFObins.png](/images/GTFObins.png "GTFObins.png")
+![GTFObins.png](/docs/GTFObins.png "GTFObins.png")
 
 
 Let's take a look to the command used to to get an interactive shell:     
@@ -102,7 +102,7 @@ Now we know everything about this, what should I do to exploit it properly.
 If you can not run it, you will get something like this:
 
 
-![noperm.png](/images/noperm.png "noperm.png")
+![noperm.png](/docs/noperm.png "noperm.png")
 
 
 
@@ -182,7 +182,7 @@ Example:
 
 
 
-![privesc.png](/images/privesc.png "privesc.png")
+![privesc.png](/docs/privesc.png "privesc.png")
 
 
 
