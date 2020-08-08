@@ -1,4 +1,4 @@
-# Abusing Docker Weak Configuration
+# Abusing Docker Configuration
 
 
 ![docker.png](/docs/docker.png "docker.png")
