@@ -3,7 +3,7 @@
 test_docker=$(docker ps | grep 'CONTAINER ID' | cut -d " " -f 1-2)
 
 if [$test_docker='CONTAINER ID']; then
-	echo 'Please write down your new root credentials.'
+    echo 'Please write down your new root credentials.'
     read -p 'Choose a root user name: ' rootname
     read -s 'Choose a root password: ' passw1
     read -p 'Choose the the salt to hash your password: ' salt
@@ -25,6 +25,6 @@ elif [ $(id -u) -eq 0 ]; then
     exit
 
 else echo "Your account does not have permission to execute docker, aborting..."
-	exit
+    exit
 
 fi
