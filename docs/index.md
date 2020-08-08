@@ -1,7 +1,7 @@
 # Abusing Docker Weak Configuration
 
 
-![docker.png](../images/docker.png "docker.png")
+![docker.png](/docker-privesc/images/docker.png "docker.png")
 
 
 In this article, I talk about a classic privilege escalation through Docker containers. This is a very well known trick used when the configuration let too many accounts run docker, and you will have to do it in some CTF boxes at least. Unfortunately, it is not always correcly understood.     
