@@ -1,7 +1,7 @@
 _[<-- Home](https://flast101.github.io)_
 
 
-# Abusing Docker Weak Configuration
+# Abusing Docker Configuration
 
 
 ![docker.png](docker.png "docker.png")
