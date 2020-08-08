@@ -155,7 +155,7 @@ Now let's put this down in a bash script:
 docker_test=$( docker ps | grep "CONTAINER ID" | cut -d " " -f 1-2 ) 
 
 if [ "$docker_test" == "CONTAINER ID" ]; then
-	echo 'Please write down your new root credentials.'
+    echo 'Please write down your new root credentials.'
     read -p 'Choose a root user name: ' rootname
     read -s -p 'Choose a root password: ' passw
     echo ""
@@ -178,7 +178,7 @@ elif [ $(id -u) -eq 0 ]; then
     exit
 
 else echo "Your account does not have permission to execute docker, aborting..."
-	exit
+    exit
 
 fi
 ```
