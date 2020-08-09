@@ -13,12 +13,13 @@ I had a lot of fun the first time I encountered it in PWK lab as wells as the se
 Let's see what it is about.
 
 ## Summary
-1- Quick Definitions
-2- Real Facts
-3- GTFOBins
-4- Exploiting The Vulnerability
-5- POC Script
-6- Mitigation
+
+1- Quick Definitions   
+2- Real Facts   
+3- GTFOBins   
+4- Exploiting The Vulnerability   
+5- POC Script   
+6- Mitigation   
 
 
 ## 1- Quick Definitions
