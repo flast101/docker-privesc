@@ -118,7 +118,7 @@ If you can not run it, you will get something like this:
 
  
 
-**2. Prepare a new root user.** 
+**2. Prepare a new root user.**    
 The plan is to create a new root user by entering it directly in the **`/etc/passwd`** file.    
 With openssl, I can generate a password hashed with md5crypt which is valid in Linux. I choose a user **`$rootname`** with the password **`$passw`** and the salt **`$salt`** to generate the password hash. These will be variables in the script but with real values it should look like this: 
 ~~~
