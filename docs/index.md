@@ -72,7 +72,7 @@ By default connected to the [Docker Hub](https://hub.docker.com), a place which 
 - **Remove image**   
 **`docker image rm flast101:v1.0`**
 
-**Key points to understand:**
+### Key points to understand: 
 - By default, any machine container is run with root privileges (ie. you have root privileges inside the container). It means that any user (by default, any member of the "docker" group) who has access to the Docker Daemon has root privileges in the container.
 - Sometimes you will want to remove a container and rerun it because you updated the image (or changed the Dockerfile). If you need to remove a container, data changes you made are not persistent. We usually mount a host directory to access persistent data from the container. 
 
