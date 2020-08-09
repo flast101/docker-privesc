@@ -14,12 +14,12 @@ Let's see what it is about.
 
 ## Summary
 
-1- Quick Definitions   
-2- Real Facts   
-3- GTFOBins   
-4- Exploiting The Vulnerability   
-5- POC Script   
-6- Mitigation   
+[1- Quick Definitions](https://github.com/flast101/docker-privesc#1--quick-definitions)   
+[2- Real Facts](https://github.com/flast101/docker-privesc#2--real-facts)      
+[3- GTFOBins](https://github.com/flast101/docker-privesc#3--gtfobins)      
+[4- Exploiting The Vulnerability](https://github.com/flast101/docker-privesc#4--exploiting-the-vulnerability)   
+[5- POC Script](https://github.com/flast101/docker-privesc#5--poc-script)   
+[6- Mitigation](https://github.com/flast101/docker-privesc#6--mitigation)   
 
 * * * 
 ## 1- Quick Definitions
