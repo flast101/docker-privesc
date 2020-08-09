@@ -12,8 +12,16 @@ In this article, I talk about a classic privilege escalation through Docker cont
 I had a lot of fun the first time I encountered it in PWK lab as wells as the second time on a HTB machine.      
 Let's see what it is about.
 
+## Summary
+1- Quick Definitions
+2- Real Facts
+3- GTFOBins
+4- Exploiting The Vulnerability
+5- POC Script
+6- Mitigation
 
-## Quick Definitions
+
+## 1- Quick Definitions
 
 **What is Docker ?**
 
@@ -32,7 +40,7 @@ Virtual machines (VMs) are an abstraction of physical hardware turning one serve
 
 
 
-## 1- Real Facts
+## 2- Real Facts
 
 
 ### How does it work ?
@@ -90,7 +98,7 @@ Now, let's suppose you are the admin and you want John to be able to run a conta
 
 This is where security problems arise: he can easily read and writethe `**/etc/shadow`** file, and he can also create a new root user by entering it directly in the **`/etc/passwd`** file... WTF are you doing John !? ;-)
 
-## 2- GTFOBins
+## 3- GTFOBins
 
 If you like pentest and CTF, you know [GTFOBins](https://gtfobins.github.io/). If you don't, you should take a look.    
 GTFOBins is a curated list of Unix binaries that can be exploited by an attacker to bypass local security restrictions.
@@ -107,7 +115,7 @@ The container is based on Alpine, a lightweight linux disctribution, and the roo
 But hey, if you are trying to get the root flag in a CTF, you have it. 
 
 
-## 3- Exploiting The Vulnerability
+## 4- Exploiting The Vulnerability
 
 Now we know everything about this, what should I do to exploit it properly ?
 
@@ -121,7 +129,7 @@ If you can not run it, you will get something like this:
 
  
 
-**2. Prepare a new root user.** 
+**2. Prepare a new root user.**     
 The plan is to create a new root user by entering it directly in the **`/etc/passwd`** file.    
 With openssl, I can generate a password hashed with md5crypt which is valid in Linux. I choose a user **`$rootname`** with the password **`$passw`** and the salt **`$salt`** to generate the password hash. These will be variables in the script but with real values it should look like this: 
 ~~~
@@ -149,7 +157,7 @@ docker exec -ti flast101 sh -c "cat /mnt/tmp/new_account >> /mnt/etc/passwd"
 **6. Remove the `new_account` file and login as root to the host.**   
 
 
-## 4- POC Script
+## 5- POC Script
 
 Requirements:
 
@@ -201,7 +209,7 @@ Example:
 
 
 
-## 5- Mitigation
+## 6- Mitigation
 
 I could read here and there that you "should not use the docker group". This is just wrong. We just saw that it is not a matter of group, and moreover, in any organization you will need other accounts than root to be able to run docker. As usual, the first thing to do is simply apply the principle of least privilege (PoLP), starting with allowing as few people as possible to run docker. Then, isolating docker from your host machine is essential.
 
