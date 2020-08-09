@@ -203,7 +203,7 @@ Example:
 
 ## 5- Mitigation
 
-I could read here and there that you "should not use the docker group". This is just wrong. We just saw that it is not a matter of group, and moreover, in any organization you will need other accounts than root to be able to run docker. This usual, the first thing to do is simply apply the principle of least privilege (PoLP), starting with allowing as few people as possible to run docker. Then, isolating docker from your host machine is essential.
+I could read here and there that you "should not use the docker group". This is just wrong. We just saw that it is not a matter of group, and moreover, in any organization you will need other accounts than root to be able to run docker. As usual, the first thing to do is simply apply the principle of least privilege (PoLP), starting with allowing as few people as possible to run docker. Then, isolating docker from your host machine is essential.
 
 The principle is to create a user whose uid is unlikely to be used. Then have the docker daemon use it for launching containers.
 
