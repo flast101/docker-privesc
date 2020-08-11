@@ -14,12 +14,12 @@ Let's see what it is about.
 
 ## Summary
 
-1- Quick Definitions
+1- Quick Definitions   
 2- Real Facts     
 3- GTFOBins    
-4- Exploiting The Vulnerability 
-5- POC Script  
-6- Mitigation 
+4- Exploiting The Vulnerability    
+5- POC Script     
+6- Mitigation     
 
 * * * 
 ## 1- Quick Definitions
