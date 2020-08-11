@@ -97,7 +97,8 @@ Now, let's suppose you are the admin and you want John to be able to run a conta
 **But what if John runs a container using this command:**
 **`docker run -tid -v /etc/:/mnt/ --name flast101 ubuntu:latest bash`**
 
-This is where security problems arise: he can easily read and writethe `**/etc/shadow`** file, and he can also create a new root user by entering it directly in the **`/etc/passwd`** file... WTF are you doing John !? ;-)
+This is where security problems arise: he can easily read and write the **`/etc/shadow`** file, and he can also create a new root user by entering it directly in the **`/etc/passwd`** file... WTF are you doing John !? ;-)
+
 
 * * * 
 ## 3- GTFOBins
@@ -113,7 +114,7 @@ There are some inputs about Docker [here](https://gtfobins.github.io/gtfobins/do
 Let's take a look to the command used to to get an interactive shell:     
 **`docker run -v /:/mnt --rm -it alpine chroot /mnt sh`**
 
-The container is based on Alpine, a lightweight linux disctribution, and the root directory "/" is accessible in the /mnt directory. It also apwn a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
+The container is based on Alpine, a lightweight linux disctribution, and the root directory "/" is accessible in the "/mnt" directory. It also spawnw a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
 But hey, if you are trying to get the root flag in a CTF, you have it. 
 
 * * * 
