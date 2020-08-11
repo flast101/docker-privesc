@@ -1,7 +1,7 @@
 # Abusing Docker Configuration
 
 
-![docker.png](docs/docker.png "docker.png")
+![docker.png](docker.png "docker.png")
 
 
 
@@ -9,14 +9,23 @@ In this article, I talk about a classic privilege escalation through Docker cont
 I had a lot of fun the first time I encountered it in PWK lab as wells as the second time on a HTB machine.      
 Let's see what it is about.
 
+## Summary
 
+[1- Quick Definitions](https://github.com/flast101/docker-privesc#1--quick-definitions)   
+[2- Real Facts](https://github.com/flast101/docker-privesc#2--real-facts)      
+[3- GTFOBins](https://github.com/flast101/docker-privesc#3--gtfobins)      
+[4- Exploiting The Vulnerability](https://github.com/flast101/docker-privesc#4--exploiting-the-vulnerability)   
+[5- POC Script](https://github.com/flast101/docker-privesc#5--poc-script)   
+[6- Mitigation](https://github.com/flast101/docker-privesc#6--mitigation)   
+
+* * * 
 ## 1- Quick Definitions
 
 **What is Docker ?**
 
 Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package.
 
-![schema.png](docs/schema.png "schema.png")
+![schema.png](schema.png "schema.png")
 
 **What are containers ?**
 
@@ -28,7 +37,7 @@ Virtual machines (VMs) are an abstraction of physical hardware turning one serve
 
 
 
-
+* * *
 ## 2- Real Facts
 
 
@@ -87,6 +96,8 @@ Now, let's suppose you are the admin and you want John to be able to run a conta
 
 This is where security problems arise: he can easily read and write the **`/etc/shadow`** file, and he can also create a new root user by entering it directly in the **`/etc/passwd`** file... WTF are you doing John !? ;-)
 
+
+* * * 
 ## 3- GTFOBins
 
 If you like pentest and CTF, you know [GTFOBins](https://gtfobins.github.io/). If you don't, you should take a look.    
@@ -94,7 +105,7 @@ GTFOBins is a curated list of Unix binaries that can be exploited by an attacker
 
 There are some inputs about Docker [here](https://gtfobins.github.io/gtfobins/docker):
 
-![GTFObins.png](docs/GTFObins.png "GTFObins.png")
+![GTFObins.png](GTFObins.png "GTFObins.png")
 
 
 Let's take a look to the command used to to get an interactive shell:     
@@ -103,7 +114,7 @@ Let's take a look to the command used to to get an interactive shell:
 The container is based on Alpine, a lightweight linux disctribution, and the root directory "/" is accessible in the "/mnt" directory. It also spawns a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
 But hey, if you are trying to get the root flag in a CTF, you have it. 
 
-
+* * * 
 ## 4- Exploiting The Vulnerability
 
 Now we know everything about this, what should I do to exploit it properly ?
@@ -112,13 +123,13 @@ Now we know everything about this, what should I do to exploit it properly ?
 If you can not run it, you will get something like this:
 
 
-![noperm.png](docs/noperm.png "noperm.png")
+![noperm.png](noperm.png "noperm.png")
 
 
 
  
 
-**2. Prepare a new root user.**    
+**2. Prepare a new root user.**     
 The plan is to create a new root user by entering it directly in the **`/etc/passwd`** file.    
 With openssl, I can generate a password hashed with md5crypt which is valid in Linux. I choose a user **`$rootname`** with the password **`$passw`** and the salt **`$salt`** to generate the password hash. These will be variables in the script but with real values it should look like this: 
 ~~~
@@ -145,7 +156,7 @@ docker exec -ti flast101 sh -c "cat /mnt/tmp/new_account >> /mnt/etc/passwd"
 
 **6. Remove the `new_account` file and login as root to the host.**   
 
-
+* * * 
 ## 5- POC Script
 
 Requirements:
@@ -193,11 +204,11 @@ Example:
 
 
 
-![privesc.png](docs/privesc.png "privesc.png")
+![privesc.png](privesc.png "privesc.png")
 
 
 
-
+* * * 
 ## 6- Mitigation
 
 I could read here and there that you "should not use the docker group". This is just wrong. We just saw that it is not a matter of group, and moreover, in any organization you will need other accounts than root to be able to run docker. As usual, the first thing to do is simply apply the principle of least privilege (PoLP), starting with allowing as few people as possible to run docker. Then, isolating docker from your host machine is essential.
@@ -228,13 +239,10 @@ systemctl daemon-reload && systemctl restart docker
 
 By default, the process is run as root in the container:
 
-![nomitig.png](docs/nomitig.png "nomitig.png")
+![nomitig.png](nomitig.png "nomitig.png")
 
 Applying the mitigation, we can get rid of this problem. The user "dockremap" is now running the process:
 
 
-![mitig.png](docs/mitig.png "mitig.png")
-
-
-
+![mitig.png](mitig.png "mitig.png")
 
