@@ -114,7 +114,7 @@ There are some inputs about Docker [here](https://gtfobins.github.io/gtfobins/do
 Let's take a look to the command used to to get an interactive shell:     
 **`docker run -v /:/mnt --rm -it alpine chroot /mnt sh`**
 
-The container is based on Alpine, a lightweight linux disctribution, and the root directory "/" is accessible in the "/mnt" directory. It also spawnw a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
+The container is based on Alpine, a lightweight linux disctribution, and the root directory "/" is accessible in the "/mnt" directory. It also spawns a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
 But hey, if you are trying to get the root flag in a CTF, you have it. 
 
 * * * 
