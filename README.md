@@ -18,6 +18,7 @@ Let's see what it is about.
 [5- POC Script](https://github.com/flast101/docker-privesc#5--poc-script)   
 [6- Mitigation](https://github.com/flast101/docker-privesc#6--mitigation)   
 
+
 * * * 
 ## 1- Quick Definitions
 
@@ -204,7 +205,7 @@ Example:
 
 
 
-![privesc.png](privesc.png "privesc.png")
+![privesc-blur.png](privesc-blur.png "privesc-blur.png")
 
 
 
@@ -239,10 +240,10 @@ systemctl daemon-reload && systemctl restart docker
 
 By default, the process is run as root in the container:
 
-![nomitig.png](nomitig.png "nomitig.png")
+![nomitig-blur.png](nomitig-blur.png "nomitig-blur.png")
 
 Applying the mitigation, we can get rid of this problem. The user "dockremap" is now running the process:
 
 
-![mitig.png](mitig.png "mitig.png")
+![mitig-blur.png](mitig-blur.png "mitig-blur.png")
 
