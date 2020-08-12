@@ -20,8 +20,8 @@
 #      target in your working directory.
 #
 # Detailed article: https://flast101.github.io/docker-privesc
+# Download: https://github.com/flast101/docker-privesc
 # Contact: flast101.sec@gmail.com
-
 
 #!/bin/bash
 
@@ -51,7 +51,7 @@ elif [ "$docker_test" == "CONTAINER ID" ]; then
     rm /tmp/new_account
     su $rootname
 
-else echo "Your account does not have permission to execute docker or docker is running, aborting..."
+else echo "Your account does not have permission to execute docker or docker is not running, aborting..."
     exit
 
 fi
