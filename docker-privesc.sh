@@ -27,8 +27,12 @@
 
 docker_test=$( docker ps | grep "CONTAINER ID" | cut -d " " -f 1-2 ) 
 
-if [ "$docker_test" == "CONTAINER ID" ]; then
-	echo 'Please write down your new root credentials.'
+if [ $(id -u) -eq 0 ]; then
+    echo "The user islready root. Have fun ;-)"
+    exit
+    
+elif [ "$docker_test" == "CONTAINER ID" ]; then
+    echo 'Please write down your new root credentials.'
     read -p 'Choose a root user name: ' rootname
     read -s -p 'Choose a root password: ' passw
     echo ""
@@ -47,11 +51,7 @@ if [ "$docker_test" == "CONTAINER ID" ]; then
     rm /tmp/new_account
     su $rootname
 
-elif [ $(id -u) -eq 0 ]; then
-    echo "The user islready root. Have fun ;-)"
-    exit
-
 else echo "Your account does not have permission to execute docker or docker is running, aborting..."
-	exit
+    exit
 
 fi
