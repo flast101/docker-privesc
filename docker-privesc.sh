@@ -7,8 +7,8 @@
 # Tested on: tested on version 19.03.7, build 7141c19, OS Kali 2020.2
 # CVE : N/A
 
-# This is a known trick abusing usual baddly configured machines with Docker.
-# This script obtains root privileges from any host account with access to the Docker daemon, 
+# This is a known trick abusing badly configured machines with Docker. This script 
+# obtains root privileges from any host account with access to the Docker daemon, 
 # and creates a new root user by entering it directly in the /etc/passwd file with the creds 
 # you provide. Usually this includes (but not only) accounts in the "docker" group.
 #  
@@ -51,7 +51,7 @@ elif [ $(id -u) -eq 0 ]; then
     echo "The user islready root. Have fun ;-)"
     exit
 
-else echo "Your account does not have permission to execute docker, aborting..."
+else echo "Your account does not have permission to execute docker or docker is running, aborting..."
 	exit
 
 fi
