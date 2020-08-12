@@ -4,7 +4,7 @@
 # Vendor Homepage: https://www.docker.com/
 # Software Link: https://www.docker.com/products/docker-desktop
 # Version: all 
-# Tested on: tested on version 19.03.7, build 7141c19, OS Kali 2020.2
+# Tested on: tested on version 19.03.7, build 7141c19
 # CVE : N/A
 
 # This is a known trick abusing badly configured machines with Docker. This script 
