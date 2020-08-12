@@ -1,5 +1,4 @@
 # Exploit Title: Docker Daemon - Local Privilege Escalation
-# Google Dork: N/A
 # Date: 12 august 2020
 # Exploit Author: flast101
 # Vendor Homepage: https://www.docker.com/
