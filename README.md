@@ -1,4 +1,4 @@
-# Abusing Docker Configuration
+# Abusing Docker Configuration: Privesc Script
 
 
 ![docs/docker.png](docs/docker.png "docs/docker.png")
@@ -16,7 +16,6 @@
 
 
 
-* * * 
 ## Mitigation 
 
 By default, the process is run as root in the container:
