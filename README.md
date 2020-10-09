@@ -1,5 +1,5 @@
 # Abusing Docker Configuration: Privesc Script
-
+Read full article: https://flast101.github.io/docker-privesc/
 
 ![docs/docker.png](docs/docker.png "docs/docker.png")
 
