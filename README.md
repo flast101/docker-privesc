@@ -245,5 +245,5 @@ By default, the process is run as root in the container:
 Applying the mitigation, we can get rid of this problem. The user "dockremap" is now running the process:
 
 
-![mitig.png](docs/mitig-blur.png "docs/mitig.png")
+![mitig.png](docs/mitig.png "docs/mitig.png")
 
