@@ -27,7 +27,7 @@ Let's see what it is about.
 
 Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package.
 
-![schema.png](schema.png "schema.png")
+![schema.png](docs/schema.png "docs/schema.png")
 
 **What are containers ?**
 
@@ -107,7 +107,7 @@ GTFOBins is a curated list of Unix binaries that can be exploited by an attacker
 
 There are some inputs about Docker [here](https://gtfobins.github.io/gtfobins/docker):
 
-![GTFObins.png](GTFObins.png "GTFObins.png")
+![GTFObins.png](docs/GTFObins.png "docs/GTFObins.png")
 
 
 Let's take a look to the command used to to get an interactive shell:     
@@ -125,7 +125,7 @@ Now we know everything about this, what should I do to exploit it properly ?
 If you can not run it, you will get something like this:
 
 
-![noperm.png](noperm.png "noperm.png")
+![noperm.png](docs/noperm.png "docs/noperm.png")
 
 
 
@@ -205,7 +205,7 @@ Example:
 
 
 
-![privesc.png](privesc.png "privesc.png")
+![privesc.png](docs/privesc.png "docs/privesc.png")
 
 
 
@@ -240,10 +240,10 @@ systemctl daemon-reload && systemctl restart docker
 
 By default, the process is run as root in the container:
 
-![nomitig.png](nomitig.png "nomitig.png")
+![nomitig.png](docs/nomitig.png "docs/nomitig.png")
 
 Applying the mitigation, we can get rid of this problem. The user "dockremap" is now running the process:
 
 
-![mitig.png](mitig-blur.png "mitig.png")
+![mitig.png](docs/mitig-blur.png "docs/mitig.png")
 
