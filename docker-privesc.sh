@@ -13,7 +13,7 @@
 # you provide. Usually this includes (but not only) accounts in the "docker" group.
 #  
 # Requirements:
-#    - Access to a shell on the target with a user which can run Docker.
+#    - Access to a shell on the target with a user that can run Docker.
 #    - The target should have either an internet connection or an image installed in Docker. Use 
 #      docker images to check and change the “alpine” image accordingly. If there is no image go 
 #      to https://hub.docker.com to get one (tar.gz file with its Dockerfile) and upload it on the 
