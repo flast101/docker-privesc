@@ -35,6 +35,7 @@ elif [ "$docker_test" == "CONTAINER ID" ]; then
     echo 'Please write down your new root credentials.'
     read -p 'Choose a root user name: ' rootname
     read -s -p 'Choose a root password: ' passw
+    echo -e "\n"
     hpass=$(openssl passwd -1 -salt mysalt $passw)
 
     echo -e "$rootname:$hpass:0:0:root:/root:/bin/bash" > new_account
