@@ -27,3 +27,4 @@ Applying the mitigation, we can get rid of this problem. The user "dockremap" is
 
 ![mitig.png](docs/mitig.png "docs/mitig.png")
 
+Be Curious, Learning is Life ! :smiley:
