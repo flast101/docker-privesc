@@ -248,7 +248,7 @@ Applying the mitigation, we can get rid of this problem. The user "dockremap" is
 
 ![mitig.png](mitig.png "mitig.png")
 
-Be Curious, Learning is Life !
+Stay curious !
 
 _[<-- Home](https://flast101.github.io)_
 
